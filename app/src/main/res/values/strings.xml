@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name" translatable="false">Weather</string>
+    <string name="error_occurred">An error occurred</string>
+    <string name="error_occurred_message">%s ran into an error. Please email the developer to get this issue fixed.</string>
+    <string name="email_developer">Email developer</string>
+    <string name="email" translatable="false">trailsense@protonmail.com</string>
+    <string name="weather">Weather</string>
+    <string name="settings">Settings</string>
+    <string name="weather_no_change">No change</string>
+    <string name="weather_storm">Storm</string>
+    <!--Clear weather, lack of clouds-->
+    <string name="weather_clear">Clear</string>
+    <!--Overcast weather, full of clouds-->
+    <string name="weather_overcast">Overcast</string>
+    <string name="weather_precipitation">Precipitation</string>
+    <string name="weather_wind">Wind</string>
+    <string name="weather_thunderstorm">Thunderstorm</string>
+    <string name="precipitation_none">No precipitation</string>
+    <string name="precipitation_rain">Rain</string>
+    <string name="precipitation_drizzle">Drizzle</string>
+    <string name="precipitation_snow">Snow</string>
+    <string name="precipitation_snow_pellets">Snow pellets</string>
+    <string name="precipitation_hail">Hail</string>
+    <string name="precipitation_small_hail">Small Hail</string>
+    <string name="precipitation_ice_pellets">Ice Pellets</string>
+    <string name="precipitation_snow_grains">Snow Grains</string>
+    <string name="weather_data_source_attribution">Weather data by Open-Meteo.com</string>
+</resources>
