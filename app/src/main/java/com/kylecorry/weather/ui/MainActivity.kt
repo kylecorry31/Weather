@@ -1,5 +1,6 @@
 package com.kylecorry.weather.ui
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -18,7 +19,7 @@ class MainActivity : AndromedaActivity() {
     private lateinit var navController: NavController
     private lateinit var bottomNavigation: BottomNavigationView
 
-    private val permissions = mutableListOf<String>()
+    private val permissions = mutableListOf(Manifest.permission.ACCESS_COARSE_LOCATION)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ExceptionHandler.initialize(this)

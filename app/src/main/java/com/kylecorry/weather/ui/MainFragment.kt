@@ -20,6 +20,7 @@ import com.kylecorry.sol.units.TemperatureUnits
 import com.kylecorry.weather.R
 import com.kylecorry.weather.databinding.FragmentMainBinding
 import com.kylecorry.weather.infrastructure.internet.WeatherProvider
+import com.kylecorry.weather.infrastructure.location.LocationService
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.Duration
 import java.time.Instant
@@ -34,6 +35,9 @@ class MainFragment : BoundFragment<FragmentMainBinding>() {
 
     @Inject
     lateinit var weatherProvider: WeatherProvider
+
+    @Inject
+    lateinit var locationService: LocationService
 
     private val temperatureLayer by lazy {
         AreaChartLayer(
@@ -55,7 +59,8 @@ class MainFragment : BoundFragment<FragmentMainBinding>() {
     override fun onResume() {
         super.onResume()
         inBackground {
-            val weather = weatherProvider.getWeather(Coordinate(42.0, -72.0))
+            val weather = weatherProvider.getWeather(locationService.getLastLocation() ?: Coordinate.zero)
+            val city = locationService.getCity(locationService.getLastLocation() ?: Coordinate.zero)
             val current = weather.minByOrNull { Duration.between(Instant.now(), it.time).abs() }
             onMain {
                 binding.homeTitle.title.text = formatter.formatWeather(current?.value?.condition)
@@ -63,8 +68,18 @@ class MainFragment : BoundFragment<FragmentMainBinding>() {
                     Resources.dp(requireContext(), 24f).toInt(),
                     left = formatter.getWeatherImage(current?.value?.condition)
                 )
-                binding.homeTitle.subtitle.text =
+
+                val subtitle = StringBuilder()
+                if (city != null) {
+                    subtitle.append("${city.city}, ${city.state}\n")
+                }
+
+                subtitle.append(
                     "${current?.value?.temperature?.convertTo(TemperatureUnits.F)?.temperature?.roundToInt() ?: 0}°    ${current?.value?.humidity?.roundToInt() ?: 0}%"
+                )
+
+
+                binding.homeTitle.subtitle.text = subtitle
                 temperatureLayer.data = Chart.getDataFromReadings(weather) {
                     it.temperature.convertTo(TemperatureUnits.F).temperature
                 }

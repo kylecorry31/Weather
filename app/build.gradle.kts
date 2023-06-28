@@ -95,6 +95,7 @@ dependencies {
     implementation("com.github.kylecorry31.andromeda:list:$andromedaVersion")
     implementation("com.github.kylecorry31.andromeda:files:$andromedaVersion")
     implementation("com.github.kylecorry31.andromeda:canvas:$andromedaVersion")
+    implementation("com.github.kylecorry31.andromeda:location:$andromedaVersion")
 
     // Ceres
     implementation("com.github.kylecorry31:ceres:0.3.5")
